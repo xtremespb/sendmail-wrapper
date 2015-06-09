@@ -7,6 +7,7 @@ use Email::Address;
 my $user = getpwuid( $< );
 my $smtp_password = 'password';
 my $smtp_default_password = 'password';
+my $server = 'srv1.re-hash.org';
 
 my $input = '';
 my $to_string = '';
@@ -28,10 +29,10 @@ $rec =~ s/\@/\\@/;
 
 my $smtp = Net::SMTP_auth->new('127.0.0.1', Port => 25, Timeout => 10, Debug => 0);
 die "Could not connect to SMTP server!\n" unless $smtp;
-if (!$smtp->auth('PLAIN', $user.'@srv1.re-hash.org', $smtp_password)) {
- $smtp->auth('PLAIN', 'default@srv1.re-hash.org', $smtp_default_password) or die "Auth failed!\n";
+if (!$smtp->auth('PLAIN', $user.'@'.$server, $smtp_password)) {
+ $smtp->auth('PLAIN', 'default@'.$server, $smtp_default_password) or die "Auth failed!\n";
 }
-$smtp->mail($user . '\@srv1.re-hash.org');
+$smtp->mail($user.'\@'.$server);
 $smtp->to($rec);
 $smtp->data();
 $smtp->datasend($input);
