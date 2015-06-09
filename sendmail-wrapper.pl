@@ -3,11 +3,10 @@ use strict;
 use warnings;
 use Net::SMTP_auth;
 use Email::Address;
-use Data::Dumper;
 
 my $user = getpwuid( $< );
-my $smtp_password = 'P6t9N3j9';
-my $smtp_default_password = '1X4l1Q9j';
+my $smtp_password = 'password';
+my $smtp_default_password = 'password';
 
 my $input = '';
 my $to_string = '';
